@@ -1,0 +1,21 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.page-wrapper {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  word-break: break-all;
+  background-color: #fff;
+  -webkit-overflow-scrolling: touch;
+}
+
+#container {
+  padding: 14px 18px 20px 20px;
+  background-color: #fff;
+}
