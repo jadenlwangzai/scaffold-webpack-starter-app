@@ -1,36 +1,67 @@
 {
-    "name": "template",
-    "version": "1.0.0",
-    "description": "for Ali Cloud FE interview",
-    "keywords": [
-        "template"
-    ],
-    "main": "template.js",
-    "scripts": {
-        "clean": "rimraf dist",
-        "start": "webpack-dev-server --inline --open",
-        "build": "rimraf dist && webpack --progress --config webpack.config.js"
-    },
-    "author": "jaden_wong@icloud.com",
-    "license": "ISC",
-    "devDependencies": {
-        "@babel/cli": "^7.4.4",
-        "@babel/core": "^7.4.4",
-        "@babel/plugin-transform-runtime": "^7.4.4",
-        "@babel/preset-env": "^7.4.4",
-        "@babel/runtime": "^7.4.4",
-        "babel-loader": "^8.0.5",
-        "eslint": "^4.3.0",
-        "file-loader": "^0.11.2",
-        "html-loader": "^0.4.5",
-        "html-webpack-plugin": "^3.2.0",
-        "prettier": "1.17.0",
-        "rimraf": "^2.6.3",
-        "webpack": "^4.31.0",
-        "webpack-cli": "^3.3.2",
-        "webpack-dev-server": "^3.3.1"
-    },
-    "dependencies": {
-        "core-js": "^3.0.1"
-    }
+  "name": "webpack-starter-app",
+  "version": "1.0.0",
+  "description": "a scanffold resp for using webpack to build Apps",
+  "keywords": [
+    "scanffold",
+    "webpack",
+    "app"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "watch:dev": "cross-env NODE_ENV=dev webpack-dev-server  --config webpack.config.dev.js --color --progress --watch",
+    "watch:test": "cross-env NODE_ENV=test webpack-dev-server  --config webpack.config.dev.js --color --progress --watch",
+    "watch:uat": "cross-env NODE_ENV=uat webpack-dev-server  --config webpack.config.dev.js --color --progress --watch",
+    "build": "rimraf dist && NODE_ENV=production webpack  --config webpack.config.prod.js --color --progress",
+    "eslint:fix": "eslint src/**/*.js --fix",
+    "stylelint:fix": "stylelint src/**/*.css src/**/*.less --syntax less --fix",
+    "prettier": "prettier --check  --config ./.prettierrc --write 'src/**/*.{js,less,css}'"
+  },
+  "author": "Jaden.W <jaden_wong@icloud.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@ljadenwongl/eslint-config-base": "^1.0.0",
+    "@ljadenwongl/stylelint-config-base": "^1.0.0",
+    "autoprefixer": "^9.7.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "commitizen": "^4.0.3",
+    "cross-env": "^6.0.3",
+    "css-loader": "^3.2.0",
+    "cssnano": "^4.1.10",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^3.0.9",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "lint-staged": "^9.4.2",
+    "mini-css-extract-plugin": "^0.8.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.7.0",
+    "postcss-safe-parser": "^4.0.1",
+    "prettier": "^1.17.0",
+    "rimraf": "^2.6.3",
+    "style-loader": "^1.0.0",
+    "stylelint": "^11.1.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.26.0"
+  },
+  "browserslist": [
+    "defaults",
+    "not ie < 9",
+    "last 15 versions",
+    "> 10%",
+    "iOS 7",
+    "last 10 iOS versions"
+  ]
 }
