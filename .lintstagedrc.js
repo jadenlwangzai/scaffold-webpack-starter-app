@@ -1,8 +1,4 @@
 module.exports = {
-  '{src}/**/*.{js,json}': ['npm run eslint:fix', 'prettier --write', 'git add'],
-  '{src}/**/*.{less,css}': [
-    'npm run stylelint:fix',
-    'prettier --write',
-    'git add',
-  ],
+  'src/**/*.{js,json,ts,tsx}': ['npm run eslint:fix', 'prettier --write'],
+  'src/**/*.{less,css}': ['npm run stylelint:fix', 'prettier --write'],
 };

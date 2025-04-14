@@ -30,6 +30,12 @@ const webpackDevConfig = {
     port: 1314,
     quiet: false,
   },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
   module: {
     rules: [
       {
@@ -51,8 +57,8 @@ const webpackDevConfig = {
         ],
       },
       {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/, // 要排除node_modules,bower_components下的JS文件
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
       },
     ],

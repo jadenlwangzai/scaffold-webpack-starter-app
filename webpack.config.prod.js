@@ -16,7 +16,10 @@ const webpackProdConfig = {
   entry: {
     home: ['./src/page/home/index.js'],
   },
-
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
+  },
   // optimization: {
   //     splitChunks: {
   //         cacheGroups: {
@@ -38,6 +41,12 @@ const webpackProdConfig = {
   //         },
   //     },
   // },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
   module: {
     rules: [
       {
@@ -59,8 +68,8 @@ const webpackProdConfig = {
         ],
       },
       {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/, // 要排除node_modules,bower_components下的JS文件
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader',
       },
     ],

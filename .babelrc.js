@@ -19,6 +19,7 @@ module.exports = {
         },
       },
     ],
+    '@babel/preset-typescript',
   ],
   // 解释：@babel/plugin-transform-runtime插件会对使用到 Symbol、Promise、Map 等新类型时，自动且按需进行 polyfill
   // 解释：@babel/plugin-transform-runtime插件由于采用了沙盒（Sandbox）机制，它不会污染全局变量，同时也不会去修改内建类的原型，带来的坏处是它不会 polyfill 原型上的扩展
