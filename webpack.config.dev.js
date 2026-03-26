@@ -4,12 +4,9 @@
  * @update:2019-5-12
  */
 
-const webpack = require('webpack');
-
 const path = require('path');
-const HtmlWebpackPlugin = require(`html-webpack-plugin`);
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const miniCSSExtractPlugin = require('mini-css-extract-plugin');
-
 
 const webpackDevConfig = {
   mode: 'development',
@@ -21,14 +18,13 @@ const webpackDevConfig = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'assets/js/[name].[hash].js',
   },
-  devtool: 'inline-source-map',
+  // eval-cheap-module-source-map: faster rebuild, preserves original source lines
+  devtool: 'eval-cheap-module-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    static: path.join(__dirname, 'dist'),
     compress: true,
-    inline: true,
     hot: true,
     port: 1314,
-    quiet: false,
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
@@ -41,18 +37,11 @@ const webpackDevConfig = {
       {
         test: /\.(less|css)$/,
         use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: miniCSSExtractPlugin.loader,
-          },
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'postcss-loader',
-          },
+          // style-loader injects CSS into the DOM via <style> tags (dev only)
+          // Do NOT use style-loader and mini-css-extract-plugin together
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'postcss-loader' },
           { loader: 'less-loader' },
         ],
       },
@@ -64,7 +53,6 @@ const webpackDevConfig = {
     ],
   },
   plugins: [
-    new webpack.NamedModulesPlugin(),
     new miniCSSExtractPlugin({
       filename: './assets/css/[name].css',
       chunkFilename: './assets/css/[id].css',
@@ -73,16 +61,15 @@ const webpackDevConfig = {
       filename: 'page/home/index.html',
       template: './src/page/home/index.ejs',
       inject: true,
-      chunks: ['home', 'homeTY'],
+      chunks: ['home'],
       minify: false,
       cdn: {
-        js: [
-          `https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js`,
-        ],
+        js: ['https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js'],
       },
     }),
   ],
 };
+
 console.log(
   '============================webpack env begin=============================='
 );
@@ -90,4 +77,5 @@ console.log('webpack env：', process.env.NODE_ENV);
 console.log(
   '============================webpack env end================================'
 );
+
 module.exports = webpackDevConfig;

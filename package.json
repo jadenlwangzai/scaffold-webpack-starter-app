@@ -1,19 +1,19 @@
 {
   "name": "webpack-starter-app",
   "version": "1.0.0",
-  "description": "a scanffold resp for using webpack to build Apps",
+  "description": "a scaffold repo for using webpack to build Apps",
   "keywords": [
-    "scanffold",
+    "scaffold",
     "webpack",
     "app"
   ],
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "watch:dev": "cross-env NODE_ENV=dev webpack-dev-server  --config webpack.config.dev.js --color --progress --watch",
-    "watch:test": "cross-env NODE_ENV=test webpack-dev-server  --config webpack.config.dev.js --color --progress --watch",
-    "watch:uat": "cross-env NODE_ENV=uat webpack-dev-server  --config webpack.config.dev.js --color --progress --watch",
-    "build": "rimraf dist && NODE_ENV=production webpack  --config webpack.config.prod.js --color --progress",
+    "watch:dev": "cross-env NODE_ENV=dev webpack serve --config webpack.config.dev.js --color --progress",
+    "watch:test": "cross-env NODE_ENV=test webpack serve --config webpack.config.dev.js --color --progress",
+    "watch:uat": "cross-env NODE_ENV=uat webpack serve --config webpack.config.dev.js --color --progress",
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config webpack.config.prod.js --color --progress",
     "eslint:fix": "eslint --fix --no-warn-ignored .",
     "stylelint:fix": "stylelint src/**/*.css src/**/*.less --syntax less --fix",
     "prettier": "prettier --check  --config ./.prettierrc --write 'src/**/*.{js,less,css}'",
