@@ -1,8 +1,13 @@
-module.exports = {
-  plugins: [
-    // postcss-import resolves @import rules, must come first
-    require('postcss-import'),
-    // postcss-preset-env includes autoprefixer and transforms modern CSS
-    require('postcss-preset-env'),
-  ],
+export default {
+  plugins: {
+    'postcss-import': {},
+    'postcss-preset-env': {
+      stage: 2,
+      features: {
+        'nesting-rules': true,
+      },
+    },
+    cssnano:
+      process.env.NODE_ENV === 'production' ? { preset: 'default' } : false,
+  },
 };
