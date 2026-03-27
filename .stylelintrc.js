@@ -1,3 +1,8 @@
 module.exports = {
-  extends: ['@oyo/stylelint-config-base'],
+  rules: {
+    'color-no-invalid-hex': true,
+    'block-no-empty': true,
+    'unit-no-unknown': true,
+    'property-no-unknown': true,
+  },
 };
