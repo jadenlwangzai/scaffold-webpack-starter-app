@@ -7,7 +7,15 @@ export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    ignores: ['node_modules/*', 'dist/*'],
+    ignores: ['node_modules/*', 'dist/*', '__mocks__/*'],
+  },
+  {
+    files: ['**/*.config.{js,ts}', 'commitlint.config.js'],
+    languageOptions: {
+      globals: {
+        process: 'readonly',
+      },
+    },
   },
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
