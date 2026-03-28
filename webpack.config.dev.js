@@ -1,7 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -34,13 +33,12 @@ export default {
   module: {
     rules: [
       {
-        test: /\.(less|css)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'less-loader',
-        ],
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader'],
       },
       {
         test: /\.(js|jsx|ts|tsx)$/,
@@ -69,10 +67,6 @@ export default {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'assets/css/[name].css',
-      chunkFilename: 'assets/css/[id].css',
-    }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/page/home/index.html',

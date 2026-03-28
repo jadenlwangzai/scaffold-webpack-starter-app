@@ -6,6 +6,7 @@ import prettierPlugin from 'eslint-plugin-prettier';
 export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  prettierConfig,
   {
     ignores: ['node_modules/*', 'dist/*', '__mocks__/*'],
   },
@@ -26,5 +27,4 @@ export default [
       'prettier/prettier': 'error',
     },
   },
-  prettierConfig,
 ];

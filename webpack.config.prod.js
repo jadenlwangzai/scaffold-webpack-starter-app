@@ -45,7 +45,11 @@ export default {
   module: {
     rules: [
       {
-        test: /\.(less|css)$/,
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+      },
+      {
+        test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
           'css-loader',
