@@ -1,22 +1,24 @@
 {
   "name": "webpack-starter-app",
-  "version": "1.0.0",
-  "description": "a scaffold repo for using webpack to build Apps",
+  "version": "2.0.0",
+  "description": "A scaffold for using webpack to build apps",
   "keywords": [
     "scaffold",
     "webpack",
     "app"
   ],
-  "main": "index.js",
+  "type": "module",
   "scripts": {
     "clean": "rimraf dist",
-    "watch:dev": "cross-env NODE_ENV=dev webpack serve --config webpack.config.dev.js --color --progress",
-    "watch:test": "cross-env NODE_ENV=test webpack serve --config webpack.config.dev.js --color --progress",
-    "watch:uat": "cross-env NODE_ENV=uat webpack serve --config webpack.config.dev.js --color --progress",
-    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config webpack.config.prod.js --color --progress",
-    "eslint:fix": "eslint --fix --no-warn-ignored .",
-    "stylelint:fix": "stylelint src/**/*.css src/**/*.less --syntax less --fix",
-    "prettier": "prettier --check  --config ./.prettierrc --write 'src/**/*.{js,less,css}'",
+    "dev": "cross-env NODE_ENV=development webpack serve --config webpack.config.dev.js --progress",
+    "dev:test": "cross-env NODE_ENV=test webpack serve --config webpack.config.dev.js --progress",
+    "dev:uat": "cross-env NODE_ENV=uat webpack serve --config webpack.config.dev.js --progress",
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config webpack.config.prod.js --progress",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "stylelint": "stylelint 'src/**/*.{css,less}'",
+    "stylelint:fix": "stylelint 'src/**/*.{css,less}' --fix",
+    "format": "prettier --write 'src/**/*.{js,ts,tsx,less,css}'",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -25,6 +27,9 @@
   },
   "author": "Jaden.W <jaden_wong@icloud.com>",
   "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.24.6",
     "@babel/preset-env": "^7.24.6",
@@ -38,9 +43,6 @@
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.30",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
-    "autoprefixer": "^10.4.21",
     "babel-loader": "^10.0.0",
     "commitizen": "^4.3.1",
     "cross-env": "^7.0.3",
@@ -62,13 +64,13 @@
     "postcss-import": "^16.1.0",
     "postcss-loader": "^8.1.1",
     "postcss-preset-env": "^10.1.5",
-    "postcss-safe-parser": "^7.0.1",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
-    "style-loader": "^4.0.0",
     "stylelint": "^16.18.0",
+    "stylelint-config-standard": "^37.0.0",
     "ts-jest": "^29.1.2",
     "typescript": "^5.4.5",
+    "typescript-eslint": "^8.0.0",
     "webpack": "^5.99.5",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.1"
@@ -77,12 +79,10 @@
     "@babel/runtime": "^7.24.6"
   },
   "browserslist": [
-    "defaults",
-    "not ie < 9",
-    "last 15 versions",
-    "> 10%",
-    "iOS 7",
-    "last 10 iOS versions"
+    "defaults and fully supports es6-module",
+    "last 2 versions",
+    "not dead",
+    "> 0.2%"
   ],
   "config": {
     "commitizen": {

@@ -1,4 +1,4 @@
-module.exports = {
-  'src/**/*.{js,json,ts,tsx}': ['npm run eslint:fix', 'prettier --write'],
-  'src/**/*.{less,css}': ['npm run stylelint:fix', 'prettier --write'],
+export default {
+  'src/**/*.{js,ts,tsx}': ['eslint --fix', 'prettier --write'],
+  'src/**/*.{css,less}': ['stylelint --fix', 'prettier --write'],
 };

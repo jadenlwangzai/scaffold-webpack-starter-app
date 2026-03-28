@@ -1,41 +1,37 @@
-/**
- * webpack config production
- * @auther:jaden_wong@icloud.com
- * @update:2019-5-12
- */
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const miniCSSExtractPlugin = require('mini-css-extract-plugin');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const webpackProdConfig = {
+export default {
   mode: 'production',
   target: 'web',
   entry: {
-    home: ['./src/page/home/index.js'],
+    home: './src/page/home/index.ts',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    // contenthash ensures cache busting only when file content changes
-    filename: 'assets/js/[name].[contenthash].js',
+    filename: 'assets/js/[name].[contenthash:8].js',
     clean: true,
   },
   optimization: {
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
-        // Pack shared business logic into a common chunk
-        common: {
-          name: 'common',
-          chunks: 'all',
-          minSize: 1,
-          priority: 0,
-        },
-        // Pack node_modules into a vendor chunk (higher priority)
         vendor: {
           name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
           chunks: 'all',
           priority: 10,
+        },
+        common: {
+          name: 'common',
+          chunks: 'all',
+          minSize: 1,
+          minChunks: 2,
+          priority: 0,
         },
       },
     },
@@ -51,37 +47,53 @@ const webpackProdConfig = {
       {
         test: /\.(less|css)$/,
         use: [
-          // mini-css-extract-plugin.loader extracts CSS into separate files (prod only)
-          // Do NOT use style-loader and mini-css-extract-plugin together
-          { loader: miniCSSExtractPlugin.loader },
-          { loader: 'css-loader' },
-          { loader: 'postcss-loader' },
-          { loader: 'less-loader' },
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'less-loader',
         ],
       },
       {
         test: /\.(js|jsx|ts|tsx)$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024,
+          },
+        },
+        generator: {
+          filename: 'assets/images/[name].[contenthash:8][ext]',
+        },
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[name].[contenthash:8][ext]',
+        },
       },
     ],
   },
   plugins: [
-    new miniCSSExtractPlugin({
-      filename: './assets/css/[name].[contenthash].css',
-      chunkFilename: './assets/css/[id].[contenthash].css',
+    new MiniCssExtractPlugin({
+      filename: 'assets/css/[name].[contenthash:8].css',
+      chunkFilename: 'assets/css/[id].[contenthash:8].css',
     }),
     new HtmlWebpackPlugin({
-      filename: 'page/home/index.html',
-      template: './src/page/home/index.ejs',
+      filename: 'index.html',
+      template: './src/page/home/index.html',
       inject: true,
       chunks: ['home'],
-      minify: true,
-      cdn: {
-        js: ['https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js'],
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true,
       },
     }),
   ],
 };
-
-module.exports = webpackProdConfig;

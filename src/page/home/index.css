@@ -8,11 +8,9 @@ body {
 
 .page-wrapper {
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
   word-break: break-all;
   background-color: #fff;
-  -webkit-overflow-scrolling: touch;
 }
 
 #container {
