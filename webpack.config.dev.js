@@ -48,6 +48,7 @@ export default {
           {
             loader: 'css-loader',
             options: {
+              esModule: false,
               modules: {
                 localIdentName: '[name]__[local]--[hash:base64:5]',
               },

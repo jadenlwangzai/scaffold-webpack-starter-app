@@ -66,6 +66,9 @@ export default {
           {
             loader: 'css-loader',
             options: {
+              // esModule: false ensures classnames are exported as CommonJS default,
+              // so `import styles from '*.module.css'` resolves correctly at runtime
+              esModule: false,
               modules: {
                 localIdentName: '[hash:base64:8]',
               },
